@@ -33,3 +33,25 @@ class Game:
         Throws IndexError if that point is outside of the bounds of the game
         """
         self.grid[x][y] = False
+
+    def check_neighbors_at_point(self, x, y):
+        """
+        Find the number of neighbors for a given point on the grid
+        :param x:
+        :param y:
+        :return: an integer from 0 to 8 based on the living cells next to this point
+        Throws IndexError if that point is outside of the bounds of the game
+        """
+        neighbors = 0
+        for check_x in [x - 1, x, x + 1]:
+            for check_y in [y - 1, y, y + 1]:
+                try:
+                    if self.cell_at_point(check_x, check_y) and check_x >= 0 and check_y >= 0:
+                        neighbors += 1
+                # We can treat out of bounds like a dead neighbor
+                except IndexError:
+                    pass
+        # Can't be your own neighbor, but it will be counted previously
+        if self.cell_at_point(x, y):
+            neighbors -= 1
+        return neighbors

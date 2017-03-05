@@ -70,3 +70,35 @@ class TestRequirements(unittest.TestCase):
         game = life_model.Game()
         game.set_dead_cell(0, 0)
         self.assertEqual(game.cell_at_point(0, 0), False)
+
+    # Private Method tests
+    # Tests functionality that isn't meant to be exposed to Views or Controllers
+
+    def test_that_empty_grid_has_0_neighbors(self):
+        game = life_model.Game(3, 3)
+        self.assertEqual(game.check_neighbors_at_point(1, 1), 0)
+
+    def test_that_single_cell_has_0_neighbors(self):
+        game = life_model.Game(3, 3)
+        game.set_live_cell(1, 1)
+        self.assertEqual(game.check_neighbors_at_point(1, 1), 0)
+
+    def test_that_empty_edge_cell_has_0_neighbors(self):
+        game = life_model.Game(3, 3)
+        self.assertEqual(game.check_neighbors_at_point(0, 1), 0)
+
+    def test_that_two_cells_are_each_neighbors(self):
+        game = life_model.Game(3, 3)
+        game.set_live_cell(1, 1)
+        game.set_live_cell(1, 2)
+        self.assertEqual(game.check_neighbors_at_point(1, 1), 1)
+        self.assertEqual(game.check_neighbors_at_point(1, 2), 1)
+
+    def test_that_full_grid_has_correct_neighbors(self):
+        game = life_model.Game(3, 3)
+        for x in range(3):
+            for y in range(3):
+                game.set_live_cell(x, y)
+        self.assertEqual(game.check_neighbors_at_point(0, 0), 3)
+        self.assertEqual(game.check_neighbors_at_point(0, 1), 5)
+        self.assertEqual(game.check_neighbors_at_point(1, 1), 8)
