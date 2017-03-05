@@ -48,3 +48,25 @@ class TestRequirements(unittest.TestCase):
     def test_that_created_cell_out_of_bounds(self):
         game = life_model.Game()
         self.assertRaises(IndexError, game.set_live_cell, 1, 1)
+
+    def test_that_live_cell_set_live_still_lives(self):
+        game = life_model.Game()
+        game.set_live_cell(0, 0)
+        game.set_live_cell(0, 0)
+        self.assertEqual(game.cell_at_point(0, 0), True)
+
+    def test_that_a_live_cell_can_be_set_dead(self):
+        game = life_model.Game()
+        game.set_live_cell(0, 0)
+        game.set_dead_cell(0, 0)
+        self.assertEqual(game.cell_at_point(0, 0), False)
+
+    # NOTE: In an infinite game, this should not throw an Exception
+    def test_that_set_dead_cell_out_of_bounds(self):
+        game = life_model.Game()
+        self.assertRaises(IndexError, game.set_dead_cell, 1, 1)
+
+    def test_that_dead_cell_set_dead_still_dead(self):
+        game = life_model.Game()
+        game.set_dead_cell(0, 0)
+        self.assertEqual(game.cell_at_point(0, 0), False)

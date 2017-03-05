@@ -24,3 +24,12 @@ class Game:
         Throws IndexError if that point is outside of the bounds of the game
         """
         self.grid[x][y] = True
+
+    def set_dead_cell(self, x, y):
+        """
+        Set cell to dead at point x, y
+        :param x:
+        :param y:
+        Throws IndexError if that point is outside of the bounds of the game
+        """
+        self.grid[x][y] = False
