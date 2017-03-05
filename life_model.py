@@ -6,3 +6,6 @@ class Game:
         # Fill an array with False (dead cell) X times to get the width
         # Do that Y times to get the height
         self.grid = [[False]*size_x for _ in range(size_y)]
+
+    def cell_at_point(self, x, y):
+        return self.grid[x][y]
