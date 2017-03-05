@@ -38,3 +38,13 @@ class TestRequirements(unittest.TestCase):
     def test_that_new_game_cell_out_of_bounds(self):
         new_game = life_model.Game()
         self.assertRaises(IndexError, new_game.cell_at_point, 1, 1)
+
+    def test_that_a_live_cell_can_be_created(self):
+        game = life_model.Game()
+        game.set_live_cell(0, 0)
+        self.assertEqual(game.cell_at_point(0, 0), True)
+
+    # NOTE: In an infinite game, this should not throw an Exception
+    def test_that_created_cell_out_of_bounds(self):
+        game = life_model.Game()
+        self.assertRaises(IndexError, game.set_live_cell, 1, 1)
