@@ -55,3 +55,22 @@ class Game:
         if self.cell_at_point(x, y):
             neighbors -= 1
         return neighbors
+
+    def cell_at_next_tick(self, x, y):
+        """
+        Check if a cell will be live during the next game tick
+        :param x:
+        :param y:
+        :return:
+        """
+        neighbors = self.check_neighbors_at_point(x, y)
+        if self.cell_at_point(x, y):
+            if neighbors < 2 or neighbors > 3:
+                return False
+            else:
+                return True
+        else:
+            if neighbors == 3:
+                return True
+            else:
+                return False

@@ -71,8 +71,60 @@ class TestRequirements(unittest.TestCase):
         game.set_dead_cell(0, 0)
         self.assertEqual(game.cell_at_point(0, 0), False)
 
-    # Private Method tests
-    # Tests functionality that isn't meant to be exposed to Views or Controllers
+    def test_that_empty_grid_cell_will_be_dead(self):
+        game = life_model.Game()
+        self.assertEqual(game.cell_at_next_tick(0, 0), False)
+
+    def test_that_dead_cell_with_3_neighbors_will_live(self):
+        game = life_model.Game(3, 3)
+        game.set_live_cell(1, 0)
+        game.set_live_cell(1, 1)
+        game.set_live_cell(1, 2)
+        self.assertEqual(game.cell_at_next_tick(0, 1), True)
+        self.assertEqual(game.cell_at_next_tick(2, 1), True)
+
+    def test_that_dead_cell_with_2_neighbors_remains_dead(self):
+        game = life_model.Game(3, 3)
+        game.set_live_cell(1, 0)
+        game.set_live_cell(1, 1)
+        game.set_live_cell(1, 2)
+        self.assertEqual(game.cell_at_next_tick(0, 0), False)
+        self.assertEqual(game.cell_at_next_tick(2, 0), False)
+        self.assertEqual(game.cell_at_next_tick(0, 0), False)
+        self.assertEqual(game.cell_at_next_tick(2, 0), False)
+
+    def test_that_dead_cell_with_4_neighbors_remains_dead(self):
+        game = life_model.Game(3, 3)
+        game.set_live_cell(0, 0)
+        game.set_live_cell(1, 0)
+        game.set_live_cell(2, 0)
+        game.set_live_cell(0, 1)
+        self.assertEqual(game.cell_at_next_tick(1, 1), False)
+
+    def test_that_live_cell_with_4_neighbors_will_die(self):
+        game = life_model.Game(3, 3)
+        game.set_live_cell(0, 0)
+        game.set_live_cell(0, 1)
+        game.set_live_cell(1, 1)
+        game.set_live_cell(1, 0)
+        game.set_live_cell(2, 0)
+        self.assertEqual(game.cell_at_next_tick(1, 1), False)
+
+    def test_that_live_cell_with_1_neighbor_will_die(self):
+        game = life_model.Game(3, 3)
+        game.set_live_cell(0, 0)
+        game.set_live_cell(0, 1)
+        self.assertEqual(game.cell_at_next_tick(0, 0), False)
+        self.assertEqual(game.cell_at_next_tick(0, 1), False)
+
+    def test_that_live_cell_with_2_neighbors_will_live(self):
+        game = life_model.Game(3, 3)
+        game.set_live_cell(0, 0)
+        game.set_live_cell(0, 1)
+        game.set_live_cell(1, 0)
+        self.assertEqual(game.cell_at_next_tick(0, 0), True)
+        self.assertEqual(game.cell_at_next_tick(0, 1), True)
+        self.assertEqual(game.cell_at_next_tick(1, 0), True)
 
     def test_that_empty_grid_has_0_neighbors(self):
         game = life_model.Game(3, 3)
