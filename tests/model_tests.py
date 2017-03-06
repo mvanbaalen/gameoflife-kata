@@ -154,3 +154,35 @@ class TestRequirements(unittest.TestCase):
         self.assertEqual(game.check_neighbors_at_point(0, 0), 3)
         self.assertEqual(game.check_neighbors_at_point(0, 1), 5)
         self.assertEqual(game.check_neighbors_at_point(1, 1), 8)
+
+    def test_that_tick_runs(self):
+        game = life_model.Game(3, 3)
+        game.tick()
+        self.assertEqual(game.cell_at_point(0, 0), False)
+
+    def test_that_cells_are_created_by_tick(self):
+        game = life_model.Game(4, 4)
+        game.set_live_cell(1, 1)
+        game.set_live_cell(2, 1)
+        game.set_live_cell(3, 1)
+        game.tick()
+        self.assertEqual(game.cell_at_point(2, 2), True)
+
+    def test_that_cells_are_destroyed_by_tick(self):
+        game = life_model.Game(2, 2)
+        game.set_live_cell(0, 0)
+        game.set_live_cell(1, 1)
+        game.tick()
+        self.assertEqual(game.cell_at_point(0, 0), False)
+        self.assertEqual(game.cell_at_point(1, 1), False)
+
+    def test_that_two_ticks_complete(self):
+        game = life_model.Game(3, 3)
+        game.set_live_cell(1, 0)
+        game.set_live_cell(1, 1)
+        game.set_live_cell(1, 2)
+        game.tick()
+        game.tick()
+        self.assertEqual(game.cell_at_point(1, 0), True)
+        self.assertEqual(game.cell_at_point(1, 1), True)
+        self.assertEqual(game.cell_at_point(1, 2), True)

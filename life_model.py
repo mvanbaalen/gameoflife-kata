@@ -74,3 +74,11 @@ class Game:
                 return True
             else:
                 return False
+
+    def tick(self):
+        buffer_grid = [[False] * len(self.grid[0]) for _ in self.grid]
+        for row_num in range(len(self.grid)):
+            for col_num in range(len(self.grid[0])):
+                buffer_grid[row_num][col_num] = self.cell_at_next_tick(row_num, col_num)
+        self.grid = buffer_grid
+
