@@ -6,6 +6,12 @@ class Game:
         # Do that Y times to get the height
         self.grid = [[False] * size_x for _ in range(size_y)]
 
+    def width(self):
+        return len(self.grid[0])
+
+    def height(self):
+        return len(self.grid)
+
     def cell_at_point(self, x, y):
         """
         Check if a living cell is at point x, y
@@ -14,7 +20,7 @@ class Game:
         :return: true if there is a living cell, or false if there is not
         Throws an IndexError if that point is outside of the bounds of the game
         """
-        return self.grid[x][y]
+        return self.grid[y][x]
 
     def set_live_cell(self, x, y):
         """
@@ -23,7 +29,7 @@ class Game:
         :param y:
         Throws IndexError if that point is outside of the bounds of the game
         """
-        self.grid[x][y] = True
+        self.grid[y][x] = True
 
     def set_dead_cell(self, x, y):
         """
@@ -32,7 +38,7 @@ class Game:
         :param y:
         Throws IndexError if that point is outside of the bounds of the game
         """
-        self.grid[x][y] = False
+        self.grid[y][x] = False
 
     def check_neighbors_at_point(self, x, y):
         """
@@ -81,4 +87,3 @@ class Game:
             for col_num in range(len(self.grid[0])):
                 buffer_grid[row_num][col_num] = self.cell_at_next_tick(row_num, col_num)
         self.grid = buffer_grid
-

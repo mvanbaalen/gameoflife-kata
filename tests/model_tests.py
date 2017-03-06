@@ -186,3 +186,8 @@ class TestRequirements(unittest.TestCase):
         self.assertEqual(game.cell_at_point(1, 0), True)
         self.assertEqual(game.cell_at_point(1, 1), True)
         self.assertEqual(game.cell_at_point(1, 2), True)
+
+    def test_that_new_game_size_is_accurate(self):
+        game = life_model.Game(8, 2)
+        self.assertEqual(game.width(), 8)
+        self.assertEqual(game.height(), 2)
