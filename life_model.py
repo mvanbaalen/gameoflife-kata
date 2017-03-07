@@ -88,5 +88,5 @@ class Game:
         buffer_grid = [[False] * len(self.grid[0]) for _ in self.grid]
         for row_num in range(len(self.grid)):
             for col_num in range(len(self.grid[0])):
-                buffer_grid[row_num][col_num] = self.cell_at_next_tick(row_num, col_num)
+                buffer_grid[row_num][col_num] = self.cell_at_next_tick(col_num, row_num)
         self.grid = buffer_grid

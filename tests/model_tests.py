@@ -203,3 +203,7 @@ class TestRequirements(unittest.TestCase):
         self.assertEqual(game.cell_at_point(1, 0), True)
         self.assertEqual(game.cell_at_point(1, 1), True)
         self.assertEqual(game.cell_at_point(1, 1), True)
+
+    def test_that_uneven_grid_ticks_correctly(self):
+        game = life_model.Game(8, 6)
+        game.tick()
