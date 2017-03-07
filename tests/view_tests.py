@@ -1,6 +1,7 @@
+import unittest
+
 from console_view import View
 from life_model import Game
-import unittest
 
 
 class TestRequirements(unittest.TestCase):
