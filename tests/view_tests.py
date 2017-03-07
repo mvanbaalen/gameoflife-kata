@@ -66,3 +66,12 @@ O....
 .
 ."""
         self.assertEqual(view.get_game_string(), comparison_string)
+
+    def test_that_model_can_change_after_view(self):
+        game = Game(2, 2)
+        view = View(game)
+        game.set_live_cell(0, 0)
+        comparison_string = """\
+O.
+.."""
+        self.assertEqual(view.get_game_string(), comparison_string)
