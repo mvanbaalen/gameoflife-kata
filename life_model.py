@@ -82,6 +82,9 @@ class Game:
                 return False
 
     def tick(self):
+        """
+        Perform all Game of Life rules and update the model permanently
+        """
         buffer_grid = [[False] * len(self.grid[0]) for _ in self.grid]
         for row_num in range(len(self.grid)):
             for col_num in range(len(self.grid[0])):

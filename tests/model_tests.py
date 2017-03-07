@@ -191,3 +191,15 @@ class TestRequirements(unittest.TestCase):
         game = life_model.Game(8, 2)
         self.assertEqual(game.width(), 8)
         self.assertEqual(game.height(), 2)
+
+    def test_that_edge_cells_tick_correctly(self):
+        game = life_model.Game(2, 2)
+        game.set_live_cell(0, 0)
+        game.set_live_cell(0, 1)
+        game.set_live_cell(1, 0)
+        game.set_live_cell(1, 1)
+        game.tick()
+        self.assertEqual(game.cell_at_point(0, 0), True)
+        self.assertEqual(game.cell_at_point(1, 0), True)
+        self.assertEqual(game.cell_at_point(1, 1), True)
+        self.assertEqual(game.cell_at_point(1, 1), True)
